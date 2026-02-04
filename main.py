@@ -38,7 +38,7 @@ async def process_draw(callback: types.CallbackQuery):
         )
 
         response = client.models.generate_content(
-            model="gemini-1.5-flash",
+            model="models/gemini-1.5-flash",
             contents=f"Ты профессиональный таролог. Дай краткую расшифровку расклада: {cards_text}",
             config=safe_config
         )
@@ -71,6 +71,7 @@ async def main():
     site = web.TCPSite(runner, '0.0.0.0', int(os.getenv('PORT', 8080)))
     asyncio.create_task(site.start())
     await dp.start_polling(bot)
+
 
 
 if __name__ == "__main__": asyncio.run(main())
