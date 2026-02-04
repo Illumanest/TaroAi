@@ -6,7 +6,7 @@ from aiogram import Bot, Dispatcher, types, F
 # Конфигурация
 genai.configure(api_key="AIzaSyBkPmLLkBiU5nA2CV3Y7wgIknDqFj-wJHU")
 # Пробуем САМЫЙ стабильный вариант названия
-model = genai.GenerativeModel('gemini-1.5-flash') 
+model = genai.GenerativeModel('gemini-pro') 
 
 bot = Bot(token="8557375398:AAF0rafVTVUQmT7fUn68L0afBYOKW8NxsjM")
 dp = Dispatcher()
@@ -30,3 +30,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
