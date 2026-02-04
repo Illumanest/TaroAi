@@ -26,22 +26,20 @@ async def process_draw(callback: types.CallbackQuery):
     await callback.message.answer(f"🔮 Карты: {cards_text}\n⌛ ИИ готовит ответ...")
 
     try:
-        # Настраиваем конфиг: отключаем фильтры безопасности
-        safe_config = ai_types.GenerateContentConfig(
-            temperature=0.7,
-            safety_settings=[
-                ai_types.SafetySetting(category="HARM_CATEGORY_HARASSMENT", threshold="BLOCK_NONE"),
-                ai_types.SafetySetting(category="HARM_CATEGORY_HATE_SPEECH", threshold="BLOCK_NONE"),
-                ai_types.SafetySetting(category="HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold="BLOCK_NONE"),
-                ai_types.SafetySetting(category="HARM_CATEGORY_DANGEROUS_CONTENT", threshold="BLOCK_NONE"),
-            ]
-        )
-
+        # Попробуй именно это название, оно самое точное для новой библиотеки
         response = client.models.generate_content(
-            model="models/gemini-1.5-flash",
-            contents=f"Ты профессиональный таролог. Дай краткую расшифровку расклада: {cards_text}",
-            config=safe_config
+            model="gemini-1.5-flash", 
+            contents=f"Ты таролог. Расшифруй: {cards_text}"
         )
+        
+        # ВАЖНО: В новом SDK текст лежит тут
+        answer_text = response.text 
+        
+        await callback.message.answer(f"📜 Предсказание:\n\n{answer_text}")
+
+    except Exception as e:
+        print(f"Ошибка: {e}")
+        await callback.message.answer(f"❌ Ошибка: {str(e)[:50]}")
 
         # Проверка: если ИИ вернул пустой ответ (заблокировал сам себя)
         if not response.text:
@@ -75,3 +73,4 @@ async def main():
 
 
 if __name__ == "__main__": asyncio.run(main())
+
