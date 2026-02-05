@@ -6,7 +6,7 @@ from google.generativeai.types import RequestOptions
 from aiogram import Bot, Dispatcher, types
 
 # Ключи
-GEMINI_KEY = "AIzaSyBkPmLLkBiU5nA2CV3Y7wgIknDqFj-wJHU"
+GEMINI_KEY = ""
 BOT_TOKEN = "8557375398:AAF0rafVTVUQmT7fUn68L0afBYOKW8NxsjM"
 
 # Настройка ИИ (версия v1 — лекарство от 404)
@@ -44,3 +44,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
